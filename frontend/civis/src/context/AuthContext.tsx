@@ -1,0 +1,61 @@
+import { createContext, useContext, useState, useEffect } from 'react'
+
+export interface User {
+  id: string
+  name: string
+  mobile: string
+  email: string
+  authType: 'mobile' | 'gmail'
+  createdAt: string
+}
+
+interface AuthContextValue {
+  user: User | null
+  login: (user: User) => void
+  logout: () => void
+  isLoggedIn: boolean
+}
+
+const AuthContext = createContext<AuthContextValue>({
+  user: null,
+  login: () => {},
+  logout: () => {},
+  isLoggedIn: false,
+})
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(() => {
+    try {
+      const stored = localStorage.getItem('civis_session')
+      return stored ? JSON.parse(stored) : null
+    } catch {
+      return null
+    }
+  })
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('civis_session', JSON.stringify(user))
+    } else {
+      localStorage.removeItem('civis_session')
+    }
+  }, [user])
+
+  function login(u: User) {
+    setUser(u)
+  }
+
+  function logout() {
+    setUser(null)
+  }
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout, isLoggedIn: !!user }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
+
+export function useAuth() {
+  return useContext(AuthContext)
+}
