@@ -67,7 +67,7 @@ export default function Dashboard() {
       <main className="db-main">
         <header className="db-header">
           <div>
-            <h1>My Dashboard</h1>
+            <h1>My Dashboard For Civis</h1>
             <p>Track all your filed complaints here.</p>
           </div>
           <Link to="/report" className="btn-file">
