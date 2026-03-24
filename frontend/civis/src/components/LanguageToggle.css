@@ -1,0 +1,70 @@
+.lang-toggle-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid var(--app-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(12px);
+  color: var(--app-text-strong);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[data-theme='dark'] .lang-toggle-float {
+  background: rgba(22, 36, 58, 0.85);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.lang-toggle-float:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: var(--app-brand);
+  color: var(--app-brand);
+  box-shadow: 0 8px 25px rgba(26, 111, 191, 0.2);
+}
+
+.lang-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.lang-toggle-float:hover .lang-toggle-icon {
+  transform: rotate(15deg);
+}
+
+.lang-toggle-text {
+  letter-spacing: 0.3px;
+}
+
+/* Specific styling when displaying Hindi to fit perfectly */
+.lang-toggle-text[data-lang="hi"] {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Animations on mounting */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lang-toggle-float {
+  animation: slideUpFade 0.5s ease forwards;
+}

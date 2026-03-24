@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
+import { LanguageProvider } from './context/LanguageContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import Navbar from './components/Navbar'
 import LandingPage from './components/LandingPage'
@@ -10,15 +11,18 @@ import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import ReportComplaint from './pages/ReportComplaint'
 import ComplaintDetail from './pages/ComplaintDetail'
+import LanguageToggle from './components/LanguageToggle'
 import './App.css'
 
 function App() {
   return (
     <ThemeProvider>
-      <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            {/* Full-screen pages (no shared Navbar) */}
+      <LanguageProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <LanguageToggle />
+            <Routes>
+              {/* Full-screen pages (no shared Navbar) */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={
@@ -43,7 +47,8 @@ function App() {
             } />
           </Routes>
         </BrowserRouter>
-      </AuthProvider>
+        </AuthProvider>
+      </LanguageProvider>
     </ThemeProvider>
   )
 }
