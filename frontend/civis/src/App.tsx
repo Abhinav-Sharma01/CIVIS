@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
-import { LanguageProvider } from './context/LanguageContext'
+import { LanguageProvider, TranslateRouteObserver } from './context/LanguageContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import Navbar from './components/Navbar'
 import LandingPage from './components/LandingPage'
@@ -20,6 +20,7 @@ function App() {
       <LanguageProvider>
         <AuthProvider>
           <BrowserRouter>
+            <TranslateRouteObserver />
             <LanguageToggle />
             <Routes>
               {/* Full-screen pages (no shared Navbar) */}
